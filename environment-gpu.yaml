@@ -1,0 +1,11 @@
+name: speech-map-gpu
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.12
+  - faiss-gpu>=1.9.0
+  - numpy==1.26.4
+  - polars>=1.30.0
+  - pytorch-gpu>=2.7.0
+  - tqdm>=4.67.1
+  - speech-map>=0.1.0
