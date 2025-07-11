@@ -7,7 +7,7 @@ name = "speech-map"
 version = "0.1.0"
 description = "Mean Average Precision over n-grams / words with speech features"
 readme = "README.md"
-authors = [{ name = "Maxime Poli" }]
+authors = [{ name = "Maxime Poli" }, { name = "CoML", email = "dev@cognitive-ml.fr" }]
 license = "MIT"
 keywords = ["speech", "machine learning"]
 classifiers = [
