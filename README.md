@@ -45,7 +45,7 @@ options:
   --frequency FREQUENCY
                         Feature frequency in Hz (default: 50 Hz)
   --backend {FAISS,TORCH}
-                        KNN (default: FAISS)
+                        KNN (default: TORCH)
 ```
 
 ### Python API
