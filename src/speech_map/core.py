@@ -107,9 +107,8 @@ def read_annotations(source: str | Path) -> pl.DataFrame:
             "transcription": pl.String,
         }
     )
-    annotations = pl.scan_ndjson(source, schema=schema).with_columns(
-        pl.col("onset").str.to_decimal(), pl.col("offset").str.to_decimal()
-    )
+    jsonl = pl.read_ndjson(source, schema=schema)
+    annotations = jsonl.with_columns(jsonl["onset"].str.to_decimal(), jsonl["offset"].str.to_decimal()).lazy()
     mapping = annotations.select("transcription").unique().with_row_index("transcription_id")
     return annotations.join(mapping, on="transcription").collect()
 

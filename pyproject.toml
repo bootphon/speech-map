@@ -1,10 +1,10 @@
 [build-system]
-requires = ["uv_build>=0.8.14,<0.9.0"]
-build-backend = "uv_build"
+requires = ["flit_core>=3.12.0,<4"]
+build-backend = "flit_core.buildapi"
 
 [project]
 name = "speech-map"
-version = "0.1.0"
+version = "0.1.1"
 description = "Mean Average Precision over n-grams / words with speech features"
 readme = "README.md"
 authors = [{ name = "Maxime Poli" }, { name = "CoML", email = "dev@cognitive-ml.fr" }]
@@ -22,7 +22,7 @@ classifiers = [
 ]
 requires-python = ">=3.12"
 dependencies = [
-    "numpy==1.26.4",
+    "numpy>=1.26.4",
     "polars>=1.30.0",
     "torch>=2.6.0",
     "tqdm>=4.67.1",
