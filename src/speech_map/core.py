@@ -212,7 +212,7 @@ def mean_average_precision_from_labels(y_pred: Tensor, y_true: Tensor, counts: T
     return (precision_at_k.sum(dim=1) / counts).mean().item()
 
 
-def mean_average_precision(embeddings: Tensor, labels: Tensor, *, knn_backend: KnnBackend = KnnBackend.FAISS) -> float:
+def mean_average_precision(embeddings: Tensor, labels: Tensor, *, knn_backend: KnnBackend = KnnBackend.TORCH) -> float:
     """Compute the MAP from embeddings and labels.
 
     Args:
