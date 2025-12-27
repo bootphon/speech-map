@@ -6,3 +6,5 @@ wheels/
 *.egg-info
 .venv
 *.jsonl
+.pixi/*
+!.pixi/config.toml
