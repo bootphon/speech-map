@@ -91,8 +91,8 @@ def segment_frontiers(frequency: float) -> tuple[pl.Expr, pl.Expr]:
 
     See https://docs.cognitive-ml.fr/fastabx/advanced/slicing.html for more details.
     """
-    start = (pl.col("onset") * frequency - 0.5).cast(pl.Float64).ceil().cast(pl.Int64).alias("start")
-    end = ((pl.col("offset") * frequency - 0.5).cast(pl.Float64).floor().cast(pl.Int64) + 1).alias("end")
+    start = (pl.col("onset") * frequency - 0.5).ceil().cast(pl.Int64).alias("start")
+    end = ((pl.col("offset") * frequency - 0.5).floor().cast(pl.Int64) + 1).alias("end")
     return start, end
 
 
@@ -108,8 +108,11 @@ def read_annotations(source: str | Path) -> pl.DataFrame:
         }
     )
     jsonl = pl.read_ndjson(source, schema=schema)
-    annotations = jsonl.with_columns(jsonl["onset"].str.to_decimal(), jsonl["offset"].str.to_decimal()).lazy()
-    mapping = annotations.select("transcription").unique().with_row_index("transcription_id")
+    annotations = jsonl.with_columns(
+        jsonl["onset"].str.to_decimal(inference_length=len(jsonl)),
+        jsonl["offset"].str.to_decimal(inference_length=len(jsonl)),
+    ).lazy()
+    mapping = annotations.select("transcription").unique().sort("transcription").with_row_index("transcription_id")
     return annotations.join(mapping, on="transcription").collect()
 
 
@@ -145,6 +148,8 @@ def build_embeddings_and_labels(
 
     embeddings, segment_ids = [], []
     annotations = read_annotations(jsonl).with_columns(segment_frontiers(frequency))
+    if annotations.null_count().sum_horizontal().item() > 0:
+        raise ValueError(jsonl)
     files = find_all_files(root, file_extension)
     if missing := set(annotations["fileid"].unique()) - set(files):
         raise MissingEmbeddingsError(len(missing))
