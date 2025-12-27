@@ -16,7 +16,7 @@ The naive PyTorch backend for the k-NN is enough to compute the MAP over words q
 
 You might want to use the Faiss backend if you compute the MAP over n-grams or if have a large number of
 embeddings. In this case, since Faiss is not available on PyPI, you can install this package in a pixi or conda
-environment. We recommand using pixi on Linux: clone this repository and run `pixi shell -e faiss-cpu` or
+environment. We recommend using pixi on Linux: clone this repository and run `pixi shell -e faiss-cpu` or
 `pixi shell -e faiss-gpu`.
 
 With conda, first install Faiss in your conda environment (be careful about your PyTorch and Faiss versions,
