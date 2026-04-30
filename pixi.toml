@@ -11,12 +11,12 @@ faiss-cpu = ["faiss-cpu"]
 faiss-gpu = ["faiss-gpu"]
 
 [feature.faiss-cpu]
-dependencies = { faiss-cpu = ">=1.13.2" }
+dependencies = { faiss-cpu = ">=1.14.1,<2" }
 platforms = ["linux-64"]
 
 [feature.faiss-gpu]
-dependencies = { faiss-gpu = ">=1.13.2" }
+dependencies = { faiss-gpu = ">=1.14.1,<2" }
 platforms = ["linux-64"]
 
 [dependencies]
-python = ">=3.12.12,<3.15"
+python = ">=3.12.13,<3.15"
