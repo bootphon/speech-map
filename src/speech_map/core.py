@@ -116,7 +116,7 @@ def read_annotations(source: str | Path) -> pl.DataFrame:
     return annotations.join(mapping, on="transcription").collect()
 
 
-def build_embeddings_and_labels(
+def build_embeddings_and_labels(  # ruff: ignore[too-many-arguments]
     root: str | Path,
     jsonl: str | Path,
     *,
@@ -167,7 +167,7 @@ def faiss_knn(embeddings: Tensor, k: int) -> Tensor:
     """Compute the k-nearest neighbors with Faiss."""
     try:
         import faiss
-        import faiss.contrib.torch_utils
+        import faiss.contrib.torch_utils  # ruff: ignore[unused-import]
     except ImportError as error:
         raise FaissNotAvailableError from error
 

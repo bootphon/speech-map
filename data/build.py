@@ -2,7 +2,7 @@
 
 The TextGrids are read from a zip archive or a directory, with one subdirectory per split. They must have a
 WORDS_TIER and a PHONES_TIER, as in the outputs of the Montreal Forced Aligner. See README.md for more details.
-"""
+"""  # ruff: ignore[implicit-namespace-package]
 
 import argparse
 import zipfile
@@ -72,7 +72,7 @@ def build_words(intervals: pl.LazyFrame) -> pl.LazyFrame:
 
     They last at least MIN_DURATION and less than MAX_WORD_DURATION.
     """
-    words = intervals.filter(pl.col("tier") == WORDS_TIER, pl.col("label") != "")
+    words = intervals.filter(pl.col("tier") == WORDS_TIER, pl.col("label") != "")  # ruff: ignore[compare-to-empty-string]
     phones = intervals.filter(pl.col("tier") == PHONES_TIER, ~pl.col("label").is_in([*SILENCES, PAUSE]))
     return (
         words.filter(pl.len().over("label") > 1)
