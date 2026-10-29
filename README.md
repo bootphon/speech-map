@@ -14,13 +14,18 @@ pip install speech-map
 
 The naive PyTorch backend for the k-NN is enough to compute the MAP over words quickly.
 
-You might want to use the Faiss backend if you compute the MAP over n-grams or if have a large number of
-embeddings. In this case, since Faiss is not available on PyPI, you can install this package in a pixi or conda
-environment. We recommend using pixi on Linux: clone this repository and run `pixi shell -e faiss-cpu` or
-`pixi shell -e faiss-gpu`.
+You might want to use the Faiss backend if you compute the MAP over n-grams or if you have a large number of
+embeddings. On Linux, install one of the two extras:
 
-With conda, first install Faiss in your conda environment (be careful about your PyTorch and Faiss versions,
-and from which channel they come from), and then install `speech-map` using pip.
+```bash
+pip install "speech-map[faiss-cpu]"
+pip install "speech-map[faiss-gpu]"  # x86_64 only
+```
+
+Do not install both: `faiss-cpu` and `faiss-gpu` provide the same `faiss` module.
+
+The extras install nothing on macOS: the Faiss and PyTorch wheels from PyPI each bundle their own OpenMP runtime,
+and the process crashes when both are loaded. Use the PyTorch backend there.
 
 ## Usage
 

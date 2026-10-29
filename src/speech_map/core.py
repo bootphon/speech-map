@@ -32,7 +32,7 @@ class FaissNotAvailableError(ImportError):
     """Raised when the faiss library is not available."""
 
     def __init__(self) -> None:
-        super().__init__("Install faiss-cpu or faiss-gpu via conda first to use Faiss backend for k-NN")
+        super().__init__("Install speech-map[faiss-cpu] or speech-map[faiss-gpu] (Linux only) to use Faiss for k-NN")
 
 
 class FeaturesDimensionError(ValueError):
